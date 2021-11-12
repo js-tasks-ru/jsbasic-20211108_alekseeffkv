@@ -1,4 +1,4 @@
 function ucFirst(str) {
-  return str == '' ? '':
+  return !str ? '':
          str[0].toUpperCase() + str.slice(1);
 }

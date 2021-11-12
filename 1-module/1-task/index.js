@@ -1,6 +1,6 @@
 function factorial(n) {
   if ( (n ^ 0) !== n || n < 0) {
-    return 'n должно быть целое неотрицательное число';
+    return 1;
   } else if (n == 0) {
     return 1;
   } else {
