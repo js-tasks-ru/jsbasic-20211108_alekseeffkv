@@ -33,16 +33,6 @@ export default class UserTable {
     `;
   }
 
-  #tbodyCreate() {
-    let tbody = '';
-
-    for (let user of this.#users) {
-      tbody += this.#trTemplate(user);
-    }
-
-    return tbody;
-  }
-
   #onButtonClick = event => {
     if (event.target.tagName == 'BUTTON') {
       event.target.closest('tr').remove();
@@ -63,7 +53,7 @@ export default class UserTable {
         </tr>
     </thead>
     <tbody>
-    ${this.#tbodyCreate()}
+    ${this.#users.map(this.#trTemplate).join('')}
     </tbody>
     `
 

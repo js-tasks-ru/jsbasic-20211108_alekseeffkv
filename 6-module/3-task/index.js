@@ -24,16 +24,6 @@ export default class Carousel {
     `;
   }
 
-  #createSlides() {
-    let slides = '';
-
-    for (let slide of this.slides) {
-      slides += this.#slideTemplate(slide);
-    }
-
-    return slides;
-  }
-
   #initCarousel(carouselElement) {
     let carousel = carouselElement;
     let slides = carouselElement.querySelector('.carousel__inner');
@@ -85,7 +75,7 @@ export default class Carousel {
       </div>
 
       <div class="carousel__inner">
-       ${this.#createSlides()}
+       ${this.slides.map(this.#slideTemplate).join('')}
       </div>
 
     </div>
