@@ -118,7 +118,7 @@ export default class Cart {
 
     this.modal.open();
 
-    document.querySelector('.modal__body').firstElementChild.addEventListener('click', event => {
+    modalBody.addEventListener('click', event => {
       let target = event.target;
       let productTarget = target.closest('.cart-product');
 
