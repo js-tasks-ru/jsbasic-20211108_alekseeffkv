@@ -12,36 +12,34 @@ export default class ProductGrid {
   }
 
   #createCards(products) {
-    return products.map(product => {
-            let productCard = new ProductCard(product);
-            return productCard.elem.outerHTML;
-          }).join('')
+    let productContainer = createElement(`
+      <div class="products-grid__inner">
+      </div>
+    `);
+
+    products.map( product => {
+      let productCard = new ProductCard(product);
+      productContainer.append(productCard.elem);
+    });
+
+    return productContainer;
   }
 
   #createProductGrid() {
     let productGrid = createElement(`
-    <div class="products-grid">
-      <div class="products-grid__inner">
-        ${this.#createCards(this.products)}
+      <div class="products-grid">
       </div>
-    </div>
     `);
+
+    productGrid.append( this.#createCards(this.products) );
 
     return productGrid;
   }
 
-  #mergeFilters(newFilter) {
-    for (let item in newFilter) {
-      if (this.filters[item] === undefined || this.filters[item] != newFilter[item]) {
-        this.filters[item] = newFilter[item];
-      }
-    }
-  }
-
-  updateFilter(filters) {
+  updateFilter(newFilter) {
     let filteredCards = this.products;
 
-    this.#mergeFilters(filters);
+    this.filters = {...this.filters, ...newFilter};
     
     if (this.filters.noNuts) {
       filteredCards = filteredCards.filter(product => product.nuts == false || product.nuts == undefined);
@@ -59,6 +57,8 @@ export default class ProductGrid {
       filteredCards = filteredCards.filter(product => product.category == this.filters.category);
     }
 
-    document.querySelector('.products-grid__inner').innerHTML = this.#createCards(filteredCards);
+    this.elem.querySelector('.products-grid__inner').remove();
+
+    this.elem.append( this.#createCards(filteredCards) );
   }
 }
