@@ -54,7 +54,7 @@ export default class Carousel {
         arrowRight.style.display = 'flex';
       }
 
-      if (event.target.classList.contains("carousel__button")) {
+      if (event.target.closest('.carousel__button')) {
         this.elem.dispatchEvent(new CustomEvent("product-add", {
           detail: event.target.closest('.carousel__slide').dataset.id,
           bubbles: true
