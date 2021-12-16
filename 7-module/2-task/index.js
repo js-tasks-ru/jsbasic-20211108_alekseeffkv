@@ -34,7 +34,7 @@ export default class Modal {
   }
 
   setBody(modalBody) {
-    this.elem.querySelector('.modal__body').innerHTML = modalBody.outerHTML;
+    this.elem.querySelector('.modal__body').append(modalBody);
   }
 
   open() {
